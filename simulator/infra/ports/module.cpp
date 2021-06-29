@@ -48,6 +48,13 @@ void Module::enable_logging_impl( const std::unordered_set<std::string>& names)
         c->enable_logging_impl( names);
 }
 
+// enable logging function implementation
+void Module::enable_json_logging(bool key) {
+    jsonout_enabled = key;
+    for (const auto& c : children)
+        c->enable_json_logging(key);
+}
+
 pt::ptree Module::write_ports_dumping() const
 {
     pt::ptree result;

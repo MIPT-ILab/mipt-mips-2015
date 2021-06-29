@@ -50,6 +50,10 @@ void Mem<FuncInstr>::clock( Cycle cycle)
     
     /* data path */
     wp_datapath->write( std::move( instr), cycle);
+
+    /* JSON dump of Memory-stage of executing operation */
+    if (jsonout_enabled)
+        (jsonout()) << ",\n\t{ \"type\": \"Event\", \"id\": " << instr.get_instruction_id() << ", \"cycle\": " << cycle << ", \"stage\": 3 }";
 }
 
 

@@ -30,6 +30,9 @@ private:
     std::unique_ptr<InstrMemoryIface<FuncInstr>> memory = nullptr;
     std::unique_ptr<BaseBP> bp = nullptr;
     std::unique_ptr<CacheTagArray> tags = nullptr;
+
+    /* counter for instruction_id implementation */
+    int curr_id = 0;
     
     /* Input signals */
     ReadPort<bool>* rp_stall = nullptr;

@@ -125,6 +125,10 @@ public:
     void set_sequence_id( uint64 id) { sequence_id = id; }
     auto get_sequence_id() const { return sequence_id; }
 
+    // instruction_id initialization and return - functions
+    void set_instruction_id(uint64 id) { instruction_id = id; }
+    auto get_instruction_id() const { return instruction_id; }
+
     auto get_delayed_slots() const { return delayed_slots; }
     Addr get_decoded_target() const { return target; }
     auto get_new_PC() const { return new_PC; }
@@ -151,6 +155,8 @@ protected:
 private:
     OperationType operation = OUT_UNKNOWN;
     uint64 sequence_id = NO_VAL64;
+    // instruction_id initialization
+    uint64 instruction_id = NO_VAL64;
 };
 
 template <typename I>

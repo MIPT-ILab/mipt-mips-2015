@@ -77,6 +77,10 @@ void Execute<FuncInstr>::clock( Cycle cycle)
         {
             wp_long_arithmetic_bypass->write( instr.get_v_dst(), cycle);
             wp_writeback_datapath->write( instr, cycle);
+
+            /* JSON dump of Execute-stage of executing operation */
+            if (jsonout_enabled)
+                (jsonout()) << ",\n\t{ \"type\": \"Event\", \"id\": " << instr.get_instruction_id() << ", \"cycle\": " << cycle << ", \"stage\": 2 }";
         }
     }
 
@@ -133,6 +137,10 @@ void Execute<FuncInstr>::clock( Cycle cycle)
         {
             wp_writeback_datapath->write( std::move( instr), cycle);
         }
+
+        /* JSON dump of Execute-stage of executing operation */
+        if (jsonout_enabled)
+            (jsonout()) << ",\n\t{ \"type\": \"Event\", \"id\": " << instr.get_instruction_id() << ", \"cycle\": " << cycle << ", \"stage\": 2 }";
     }
 }
 

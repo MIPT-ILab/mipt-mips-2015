@@ -73,8 +73,13 @@ void Writeback<ISA>::clock( Cycle cycle)
 
     if ( instrs.empty())
         writeback_bubble( cycle);
-    else for ( auto& instr : instrs)
-        writeback_instruction_system( &instr, cycle);
+    else for (auto& instr : instrs) {
+        writeback_instruction_system(&instr, cycle);
+
+        /* JSON dump of Writeback-stage of executing operation */
+        if (jsonout_enabled)
+            (jsonout()) << ",\n\t{ \"type\": \"Event\", \"id\": " << instr.get_instruction_id() << ", \"cycle\": " << cycle << ", \"stage\": 4 }";
+    }
 }
 
 template <typename ISA>
@@ -100,8 +105,12 @@ template <typename ISA>
 void Writeback<ISA>::writeback_bubble( Cycle cycle)
 {
     sout << "bubble\n";
-    if ( cycle >= last_writeback_cycle + 100_lt)
-        throw Deadlock( "");
+    if (cycle >= last_writeback_cycle + 100_lt) {
+        /* If will be throwed Deadlock - we need to close brackets in the logs-file */
+        if (jsonout_enabled)
+            (jsonout()) << "\n]]\n";
+        throw Deadlock("");
+    }
 }
 
 template <typename ISA>

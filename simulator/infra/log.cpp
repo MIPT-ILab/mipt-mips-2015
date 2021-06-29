@@ -22,3 +22,8 @@ OStreamWrapper::~OStreamWrapper()
 {
     ostream.rdbuf( buffer);
 }
+
+
+std::ofstream* visualizer_logger = new std::ofstream("logs.json", std::ofstream::out);
+std::ofstream& Log::jsonout() { return *visualizer_logger; }
+

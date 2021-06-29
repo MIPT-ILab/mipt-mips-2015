@@ -151,6 +151,10 @@ void Decode<FuncInstr>::clock( Cycle cycle)
     sout << instr << std::endl;
 
     wp_datapath->write( std::move( instr), cycle);
+
+    /* JSON dump of Decode-stage of executing operation */
+    if (jsonout_enabled)
+        (jsonout()) << ",\n\t{ \"type\": \"Event\", \"id\": " << instr.get_instruction_id() << ", \"cycle\": " << cycle << ", \"stage\": 1 }";
 }
 
 

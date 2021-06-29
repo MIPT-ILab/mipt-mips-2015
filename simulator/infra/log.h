@@ -9,6 +9,7 @@
 #define LOG_H
 
 #include <iosfwd>
+#include "fstream"
 
 class LogOstream
 {
@@ -48,6 +49,9 @@ class Log
 public:
     mutable LogOstream sout;
     mutable LogOstream serr;
+
+    std::ofstream& jsonout();
+    bool jsonout_enabled = false;
 
     Log();
 

@@ -42,6 +42,8 @@ protected:
     void enable_logging_impl( const std::unordered_set<std::string>& names);
     boost::property_tree::ptree topology_dumping_impl() const;
 
+    // enable-logging function initialization
+    void enable_json_logging(bool key);
 private:
     // NOLINTNEXTLINE(misc-no-recursion) Recursive, but must be finite
     virtual std::shared_ptr<PortMap> get_portmap() const { return parent->get_portmap(); }

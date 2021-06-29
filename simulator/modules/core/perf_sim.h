@@ -83,6 +83,10 @@ private:
 
     uint64 read_register( Register index) const { return narrow_cast<uint64>( rf.read( index)); }
     void write_register( Register index, uint64 value) { rf.write( index, narrow_cast<RegisterUInt>( value)); }
+
+    /* default lines initialization */
+    void start_dump_json();
+    void stop_dump_json();
 };
 
 #endif
